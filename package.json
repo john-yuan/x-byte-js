@@ -1,5 +1,5 @@
 {
-  "name": "byte-js",
+  "name": "x-byte-js",
   "description": "Base64 and hex utilities implemented in plain JavaScript, compatible with both browser and Node.js environments.",
   "keywords": [
     "base64",
@@ -36,7 +36,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/john-yuan/byte-js"
+    "url": "https://github.com/john-yuan/x-byte-js"
   },
   "publishConfig": {
     "access": "public",

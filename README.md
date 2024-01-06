@@ -1,15 +1,15 @@
 # README
 
-[![npm version](https://img.shields.io/npm/v/byte-js)](https://www.npmjs.com/package/byte-js)
-[![install size](https://packagephobia.now.sh/badge?p=byte-js)](https://packagephobia.now.sh/result?p=byte-js)
-[![npm downloads](https://img.shields.io/npm/dm/byte-js.svg)](https://npm-stat.com/charts.html?package=byte-js)
+[![npm version](https://img.shields.io/npm/v/x-byte-js)](https://www.npmjs.com/package/x-byte-js)
+[![install size](https://packagephobia.now.sh/badge?p=x-byte-js)](https://packagephobia.now.sh/result?p=x-byte-js)
+[![npm downloads](https://img.shields.io/npm/dm/x-byte-js.svg)](https://npm-stat.com/charts.html?package=x-byte-js)
 
 Base64 and hex utilities implemented in plain JavaScript, compatible with both browser and Node.js environments.
 
 ## Install
 
 ```bash
-npm i byte-js
+npm i x-byte-js
 ```
 
 ## Examples
@@ -25,7 +25,7 @@ import {
   hex2str,
   str2bytes,
   str2hex
-} from 'byte-js'
+} from 'x-byte-js'
 
 // encode base64 in standard mode
 // output: aGVsbG8g5L2g5aW9IOKcjO+4jw==
