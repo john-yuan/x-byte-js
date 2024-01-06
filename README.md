@@ -73,3 +73,7 @@ bytes2hex([
 // ]
 hex2bytes('68656c6c6f20e4bda0e5a5bd20e29c8cefb88f')
 ```
+
+## License
+
+[MIT](./LICENSE)
