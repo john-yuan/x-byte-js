@@ -38,5 +38,10 @@
     "type": "git",
     "url": "https://github.com/john-yuan/byte-js"
   },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "author": "john-yuan",
   "license": "MIT"
 }
