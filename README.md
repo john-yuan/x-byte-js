@@ -1,6 +1,16 @@
 # README
 
+[![npm version](https://img.shields.io/npm/v/byte-js)](https://www.npmjs.com/package/byte-js)
+[![install size](https://packagephobia.now.sh/badge?p=byte-js)](https://packagephobia.now.sh/result?p=byte-js)
+[![npm downloads](https://img.shields.io/npm/dm/byte-js.svg)](https://npm-stat.com/charts.html?package=byte-js)
+
 Base64 and hex utilities implemented in plain JavaScript, compatible with both browser and Node.js environments.
+
+## Install
+
+```bash
+npm i byte-js
+```
 
 ## Examples
 
