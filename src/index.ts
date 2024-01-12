@@ -87,7 +87,7 @@ function basicBase64decode(b64str: string, alphabet: string, pad: string) {
 
   b8 && bytes.push(b8)
 
-  return bytes2str(bytes)
+  return bytes
 }
 
 /**
@@ -112,6 +112,20 @@ export function base64url(str: string, withPadding?: boolean) {
 }
 
 /**
+ * Decode base64 strings (supporting both standard mode and URL safe mode) to byte array.
+ *
+ * @param b64str the base64 string to be decoded
+ * @returns a byte array
+ */
+export function base64decode2bytes(b64str: string) {
+  if (b64str.indexOf('-') > -1 || b64str.indexOf('_') > -1) {
+    return basicBase64decode(b64str, b64UrlSafeAlphabet, '=')
+  } else {
+    return basicBase64decode(b64str, b64Alphabet, '=')
+  }
+}
+
+/**
  * Decode base64 strings (supporting both standard mode and URL safe mode).
  * This function may throw a `URIError` if the `b64str` parameter is not a
  * valid base64 string.
@@ -121,11 +135,7 @@ export function base64url(str: string, withPadding?: boolean) {
  * @throws `URIError`
  */
 export function base64decode(b64str: string) {
-  if (b64str.indexOf('-') > -1 || b64str.indexOf('_') > -1) {
-    return basicBase64decode(b64str, b64UrlSafeAlphabet, '=')
-  } else {
-    return basicBase64decode(b64str, b64Alphabet, '=')
-  }
+  return bytes2str(base64decode2bytes(b64str))
 }
 
 /**

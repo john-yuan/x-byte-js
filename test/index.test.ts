@@ -7,7 +7,8 @@ import {
   hex2bytes,
   hex2str,
   str2bytes,
-  str2hex
+  str2hex,
+  base64decode2bytes
 } from '../src/index'
 
 test('str2hex', () => {
@@ -70,4 +71,11 @@ test('base64decode', () => {
   expect(base64decode('aGVsbG8g5L2g5aW9IOKcjO+4jw==')).toBe('hello 你好 ✌️')
   expect(base64decode('aGVsbG8g5L2g5aW9IOKcjO-4jw')).toBe('hello 你好 ✌️')
   expect(base64decode('aGVsbG8g5L2g5aW9IOKcjO-4jw==')).toBe('hello 你好 ✌️')
+})
+
+test('base64decode2bytes', () => {
+  expect(base64decode2bytes('aGVsbG8g5L2g5aW9IOKcjO+4jw==')).toEqual([
+    104, 101, 108, 108, 111, 32, 228, 189, 160, 229, 165, 189, 32, 226, 156,
+    140, 239, 184, 143
+  ])
 })
