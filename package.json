@@ -6,7 +6,7 @@
     "byte",
     "hex"
   ],
-  "version": "0.0.1-alpha.3",
+  "version": "1.0.0",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "module": "es/index.js",
