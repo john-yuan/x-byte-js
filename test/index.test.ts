@@ -109,15 +109,19 @@ test('base64decode2bytes', () => {
 })
 
 test('bytes2base64', () => {
-  expect(bytes2base64([
-    104, 101, 108, 108, 111, 32, 228, 189, 160, 229, 165, 189, 32, 226, 156,
-    140, 239, 184, 143
-  ])).toBe('aGVsbG8g5L2g5aW9IOKcjO+4jw==')
+  expect(
+    bytes2base64([
+      104, 101, 108, 108, 111, 32, 228, 189, 160, 229, 165, 189, 32, 226, 156,
+      140, 239, 184, 143
+    ])
+  ).toBe('aGVsbG8g5L2g5aW9IOKcjO+4jw==')
 })
 
 test('bytes2base64url', () => {
-  expect(bytes2base64url([
-    104, 101, 108, 108, 111, 32, 228, 189, 160, 229, 165, 189, 32, 226, 156,
-    140, 239, 184, 143
-  ])).toBe('aGVsbG8g5L2g5aW9IOKcjO-4jw')
+  expect(
+    bytes2base64url([
+      104, 101, 108, 108, 111, 32, 228, 189, 160, 229, 165, 189, 32, 226, 156,
+      140, 239, 184, 143
+    ])
+  ).toBe('aGVsbG8g5L2g5aW9IOKcjO-4jw')
 })
