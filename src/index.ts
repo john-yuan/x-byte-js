@@ -1,10 +1,8 @@
-const b64Alphabet =
-  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-const b64UrlSafeAlphabet =
-  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_'
+const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+const b64Alphabet = letters + '+/'
+const b64UrlSafeAlphabet = letters + '-_'
 
-function basicBase64(str: string, alphabet: string, pad: string) {
-  const bytes = str2bytes(str)
+function basicBase64(bytes: number[], alphabet: string, noPadding?: boolean) {
   let i = 0
   const l = bytes.length,
     chars = []
@@ -40,30 +38,30 @@ function basicBase64(str: string, alphabet: string, pad: string) {
 
   let result = chars.join('')
 
-  if (pad) {
-    if (mod === 1) {
-      result = result + pad + pad
-    } else if (mod === 2) {
-      result += pad
-    }
+  if (!noPadding && mod) {
+    result += mod === 1 ? '==' : '='
   }
 
   return result
 }
 
-function basicBase64decode(b64str: string, alphabet: string, pad: string) {
+function basicBase64decode(base64: string) {
   let ch,
     b6,
     b8 = 0,
     need = 8,
     i = 0
+
   const bytes = [],
-    l = b64str.length
+    l = base64.length
 
   while (i < l) {
-    ch = b64str.charAt(i++)
-    if (ch !== pad) {
-      b6 = alphabet.indexOf(ch)
+    ch = base64.charAt(i++)
+    if (ch !== '=') {
+      b6 = b64Alphabet.indexOf(ch)
+      if (b6 < 0) {
+        b6 = b64UrlSafeAlphabet.indexOf(ch)
+      }
       if (need === 8) {
         b8 = b6 << 2
         need = 2
@@ -85,9 +83,38 @@ function basicBase64decode(b64str: string, alphabet: string, pad: string) {
     }
   }
 
-  b8 && bytes.push(b8)
-
   return bytes
+}
+
+/**
+ * Encode the given byte array to a base64 string in standard mode.
+ *
+ * @param bytes the byte array to be encoded
+ * @returns the encoded string
+ */
+export function bytes2base64(bytes: number[]) {
+  return basicBase64(bytes, b64Alphabet)
+}
+
+/**
+ * Encode the given byte array to a base64 string in URL safe mode.
+ *
+ * @param bytes the byte array to be encoded
+ * @param withPadding whether to use padding, default: `false`
+ * @returns the encoded string
+ */
+export function bytes2base64url(bytes: number[], withPadding?: boolean) {
+  return basicBase64(bytes, b64UrlSafeAlphabet, !withPadding)
+}
+
+/**
+ * Decode base64 strings (supporting both standard mode and URL safe mode) to byte array.
+ *
+ * @param base64 the base64 string to be decoded
+ * @returns a byte array
+ */
+export function base64decode2bytes(base64: string) {
+  return basicBase64decode(base64)
 }
 
 /**
@@ -97,45 +124,31 @@ function basicBase64decode(b64str: string, alphabet: string, pad: string) {
  * @returns the encoded string
  */
 export function base64(str: string) {
-  return basicBase64(str, b64Alphabet, '=')
+  return bytes2base64(str2bytes(str))
 }
 
 /**
  * Encode the given string to a base64 string in URL safe mode.
  *
- * @param str the base64 string to be decoded
+ * @param str the string to be encoded
  * @param withPadding whether to use padding, default: `false`
  * @returns the encoded string
  */
 export function base64url(str: string, withPadding?: boolean) {
-  return basicBase64(str, b64UrlSafeAlphabet, withPadding ? '=' : '')
-}
-
-/**
- * Decode base64 strings (supporting both standard mode and URL safe mode) to byte array.
- *
- * @param b64str the base64 string to be decoded
- * @returns a byte array
- */
-export function base64decode2bytes(b64str: string) {
-  if (b64str.indexOf('-') > -1 || b64str.indexOf('_') > -1) {
-    return basicBase64decode(b64str, b64UrlSafeAlphabet, '=')
-  } else {
-    return basicBase64decode(b64str, b64Alphabet, '=')
-  }
+  return bytes2base64url(str2bytes(str), withPadding)
 }
 
 /**
  * Decode base64 strings (supporting both standard mode and URL safe mode).
- * This function may throw a `URIError` if the `b64str` parameter is not a
+ * This function may throw a `URIError` if the `base64` parameter is not a
  * valid base64 string.
  *
- * @param b64str the base64 string to be decoded
+ * @param base64 the base64 string to be decoded
  * @returns the decoded string
  * @throws `URIError`
  */
-export function base64decode(b64str: string) {
-  return bytes2str(base64decode2bytes(b64str))
+export function base64decode(base64: string) {
+  return bytes2str(base64decode2bytes(base64))
 }
 
 /**

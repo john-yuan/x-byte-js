@@ -24,7 +24,10 @@ import {
   hex2bytes,
   hex2str,
   str2bytes,
-  str2hex
+  str2hex,
+  bytes2base64,
+  bytes2base64url,
+  base64decode2bytes
 } from 'x-byte-js'
 
 // encode base64 in standard mode
@@ -82,6 +85,43 @@ bytes2hex([
 //   165, 189, 32, 226, 156, 140, 239, 184, 143
 // ]
 hex2bytes('68656c6c6f20e4bda0e5a5bd20e29c8cefb88f')
+
+// bytes to base64
+// output:
+// aGVsbG8g5L2g5aW9IOKcjO+4jw==
+bytes2base64([
+  104, 101, 108, 108, 111, 32, 228, 189, 160, 229,
+  165, 189, 32, 226, 156, 140, 239, 184, 143
+])
+
+// bytes to base64 url safe
+// output:
+// aGVsbG8g5L2g5aW9IOKcjO-4jw
+bytes2base64url([
+  104, 101, 108, 108, 111, 32, 228, 189, 160, 229,
+  165, 189, 32, 226, 156, 140, 239, 184, 143
+])
+
+// base64 to bytes
+// output:
+// [
+//   104, 101, 108, 108, 111, 32, 228, 189, 160, 229,
+//   165, 189, 32, 226, 156, 140, 239, 184, 143
+// ]
+base64decode2bytes('aGVsbG8g5L2g5aW9IOKcjO+4jw==')
+```
+
+## Test
+
+Run `npm test` to generate the test report.
+
+```txt
+----------|---------|----------|---------|---------|-------------------
+File      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+----------|---------|----------|---------|---------|-------------------
+All files |     100 |      100 |     100 |     100 |                   
+ index.ts |     100 |      100 |     100 |     100 |                   
+----------|---------|----------|---------|---------|-------------------
 ```
 
 ## License
